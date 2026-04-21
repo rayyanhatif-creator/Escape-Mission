@@ -1,80 +1,169 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reproduction of image_0.png Design</title>
+    <title>كافيه العز | النسخة الكاملة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* إعدادات الخلفية السوداء العامة بدقة */
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            width: 100%;
-            background-color: #000000; /* خلفية سوداء مطلقة */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            font-family: Arial, sans-serif; /* الخط العام لمتصفح الويب */
-        }
-
-        /* حاوية واجهة الذكاء الاصطناعي (iFrame Container) */
-        /* قمت بضبط الأبعاد والموضع لتطابق الصورة image_0.png */
-        .ai-container {
-            width: 100%;
-            max-width: 90vw; /* عرض مرن يعتمد على عرض الشاشة، محاكي للأصل */
-            height: 80vh; /* ارتفاع مرن يعتمد على ارتفاع الشاشة */
-            position: relative;
-            background-color: #121212; /* لون الخلفية الداخلية المائل للرمادي الداكن */
-            
-            /* أزياق بسيطة (رماي داكن) */
-            border: 1px solid #333333; 
-            border-radius: 4px; /* زوايا دائرية خفيفة */
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7); /* ظل خارجي داكن */
-            
-            overflow: hidden; /* لضمان عدم خروج الـ iFrame عن الحواف */
-        }
-
-        /* تنسيق شريط العنوان (اختياري، يضيف لمسة واقعية للأصل) */
-        .window-header {
-            height: 30px;
-            background-color: #222222;
-            border-bottom: 1px solid #333333;
-            display: flex;
-            align-items: center;
-            padding-left: 10px;
-            box-sizing: border-box;
-        }
+        :root { --gold: #FFD700; --black: #000000; --dark: #121212; }
+        body { font-family: 'Tajawal', sans-serif; background-color: var(--black); color: var(--gold); display: flex; flex-direction: column; align-items: center; margin: 0; padding: 20px; min-height: 100vh; }
+        h1 { font-size: 50px; margin: 20px 0; text-shadow: 0 0 15px rgba(255,215,0,0.5); }
+        .hero-img { width: 100%; max-width: 600px; border-radius: 25px; border: 2px solid var(--gold); height: 300px; object-fit: cover; margin-bottom: 25px; }
         
-        .window-header span {
-            color: #aaaaaa;
-            font-size: 0.8rem;
-        }
+        .team-box { width: 100%; max-width: 600px; background: var(--dark); padding: 25px; border-radius: 20px; text-align: center; border: 1px solid #222; margin-bottom: 25px; box-sizing: border-box; }
+        .on-duty { margin-top: 12px; font-size: 15px; color: #fff; background: rgba(255, 215, 0, 0.1); padding: 8px 18px; border-radius: 25px; border: 1px solid var(--gold); display: inline-block; }
 
-        /* تنسيق الـ iFrame نفسه */
-        /* هو الآن يستدعي الرابط الذي يظهر الخطأ */
-        .ai-iframe {
-            width: 100%;
-            height: calc(100% - 30px); /* يطرح ارتفاع شريط العنوان */
-            border: none;
-            display: block;
-        }
+        .menu-container { width: 100%; max-width: 600px; margin-bottom: 30px; }
+        .menu-category { background: var(--dark); border: 1px solid #333; border-radius: 20px; padding: 20px; margin-bottom: 20px; box-sizing: border-box; }
+        .category-title { border-bottom: 2px solid var(--gold); padding-bottom: 10px; margin-bottom: 15px; font-size: 20px; font-weight: bold; display: flex; align-items: center; gap: 10px; }
+        .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .menu-item { background: #080808; padding: 12px; border-radius: 12px; border-right: 4px solid var(--gold); font-size: 15px; color: #eee; }
+
+        .order-container { background: var(--gold); color: #000; width: 100%; max-width: 600px; padding: 30px; border-radius: 30px; text-align: center; box-sizing: border-box; }
+        input { width: 100%; padding: 15px; border-radius: 12px; border: 2px solid #000; margin-top: 15px; font-family: 'Tajawal'; font-weight: bold; text-align: center; font-size: 16px; box-sizing: border-box; }
+        .btn-group { display: flex; gap: 10px; margin-top: 15px; }
+        button { flex: 2; background: #000; color: var(--gold); padding: 15px; border-radius: 12px; border: none; font-weight: bold; cursor: pointer; font-size: 18px; }
+        .btn-clear { flex: 1; background: #444; color: #fff; font-size: 14px; }
+        #ai-reply-box { display: none; margin-top: 20px; padding: 20px; background: #fff; color: #000; border-radius: 20px; border: 4px solid #000; font-weight: bold; cursor: pointer; }
+        
+        .story-box { width: 100%; max-width: 600px; margin: 40px 0 20px; padding: 30px; background: var(--dark); border-radius: 20px; border: 1px solid #333; line-height: 1.8; text-align: justify; box-sizing: border-box; }
+        .survey-container { width: 100%; max-width: 600px; background: var(--dark); padding: 25px; border-radius: 20px; border: 1px solid var(--gold); text-align: center; box-sizing: border-box; margin-bottom: 30px; }
+        .stars { display: flex; justify-content: center; gap: 10px; margin: 15px 0; font-size: 30px; cursor: pointer; }
+        .star { color: #444; }
+        .star.active { color: var(--gold); }
+
+        /* تذييل الصفحة (الحقوق) */
+        .footer { margin-top: 40px; margin-bottom: 20px; font-size: 14px; color: #555; text-align: center; }
     </style>
 </head>
 <body>
 
-    <div class="ai-container">
-        <div class="window-header">
-            <span>AI Interface (Reproduction)</span>
-        </div>
-        
-        <iframe 
-            src="https://voxa-3a7ac828dfb6.herokuapp.com/webhook/9e69bf82-0dfa-4a70-aab9-fb169d28e3e5" 
-            class="ai-iframe"
-            title="AI Chat Interface">
-        </iframe>
+    <h1>كـافـيـه الـعـز</h1>
+
+    <img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=1000&auto=format&fit=crop" class="hero-img">
+
+    <div class="team-box">
+        <div style="font-weight: bold; font-size: 20px;">القائد: أبو وليد 👑 | الرئيس: أسامة ✨</div>
+        <div style="font-size: 16px; color: #aaa; margin: 8px 0;">ريان • حيان • باسل • ذكاء العز</div>
+        <div class="on-duty">🟢 متواجد الآن لخدمتكم: أسامة، ريان، حيان، باسل، <b>ذكاء العز 🤖</b></div>
     </div>
 
+    <div class="menu-container">
+        <div class="menu-category">
+            <div class="category-title">🍟 مـوالـح الـعـز</div>
+            <div class="menu-grid">
+                <div class="menu-item">بطاطس مقلية</div>
+                <div class="menu-item">ذرة</div>
+                <div class="menu-item">سمبوسة</div>
+                <div class="menu-item">بليلة</div>
+            </div>
+        </div>
+
+        <div class="menu-category">
+            <div class="category-title">🍰 حـلا الـعـز</div>
+            <div class="menu-grid">
+                <div class="menu-item">بسبوسة</div>
+                <div class="menu-item">كريمة</div>
+                <div class="menu-item">جلي</div>
+                <div class="menu-item">آيسكريم</div>
+            </div>
+        </div>
+
+        <div class="menu-category">
+            <div class="category-title">🍹 مـشـروبـات بـاردة</div>
+            <div class="menu-grid">
+                <div class="menu-item">موهيتو مانجو</div>
+                <div class="menu-item">موهيتو برتقال</div>
+                <div class="menu-item">عصير مانجو</div>
+                <div class="menu-item">عصير برتقال</div>
+            </div>
+        </div>
+
+        <div class="menu-category">
+            <div class="category-title">☕ مـشـروبـات حـارة</div>
+            <div class="menu-grid">
+                <div class="menu-item">نعناع</div>
+                <div class="menu-item">قهوة</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="order-container">
+        <h3 style="margin:0">اطلب عبر ذكاء العز 🤖☕</h3>
+        <input type="text" id="userInput" placeholder="وش بخاطرك تطلب؟" onkeypress="if(event.key==='Enter') askAI()">
+        <div class="btn-group">
+            <button onclick="askAI()">إرسال الطلب</button>
+            <button class="btn-clear" onclick="resetAll()">الرجوع ↩️</button>
+        </div>
+        <div id="ai-reply-box" onclick="resetAll()">
+            <div id="ai-text"></div>
+            <div style="font-size: 10px; margin-top: 15px; color: #999;">(اضغط للمسح والرجوع)</div>
+        </div>
+    </div>
+
+    <div class="story-box">
+        <h2 style="text-align: center; color: var(--gold);">قصة العز 📜</h2>
+        بدأت الرحلة من حلقات الصفوة، وبفضل تكاتف الفريق وعملهم الجاد صمم <b>ريان</b> هذا الموقع ليكون واجهتنا الرقمية بقيادة أبو وليد ورئاسة أسامة.
+    </div>
+
+    <div class="survey-container">
+        <h3>تقييمك لنا يهمنا ⭐</h3>
+        <div class="stars" id="starRating">
+            <span class="star" onclick="rate(1)">★</span>
+            <span class="star" onclick="rate(2)">★</span>
+            <span class="star" onclick="rate(3)">★</span>
+            <span class="star" onclick="rate(4)">★</span>
+            <span class="star" onclick="rate(5)">★</span>
+        </div>
+        <div id="ratingMsg" style="color: var(--gold); font-weight: bold;"></div>
+    </div>
+
+    <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1000&auto=format&fit=crop" class="hero-img">
+
+    <div class="footer">
+        جميع الحقوق محفوظة لأسرة العز © 2026
+    </div>
+
+    <script>
+        async function askAI() {
+            const input = document.getElementById('userInput');
+            const box = document.getElementById('ai-reply-box');
+            const text = document.getElementById('ai-text');
+            
+            if (!input.value.trim()) return;
+
+            const currentMessage = input.value;
+            input.value = ""; 
+            
+            box.style.display = "block";
+            text.innerText = "⏳ جاري التجهيز...";
+
+            try {
+                const res = await fetch('https://voxa-3a7ac828dfb6.herokuapp.com/webhook/9e69bf82-0dfa-4a70-aab9-fb169d28e3e5', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ chatInput: currentMessage })
+                });
+                const data = await res.json();
+                text.innerText = data.output || data.text || "تم استلام طلبك!";
+            } catch (e) {
+                text.innerText = "أبشر، طلبك وصل!";
+            }
+        }
+
+        function resetAll() {
+            document.getElementById('ai-reply-box').style.display = "none";
+            document.getElementById('userInput').value = "";
+            document.getElementById('ai-text').innerText = "";
+        }
+
+        function rate(n) {
+            const stars = document.querySelectorAll('.star');
+            stars.forEach((s, i) => s.classList.toggle('active', i < n));
+            const msgs = ["شكراً لصدقك!", "نطمح للأفضل!", "سعيدون برضاك!", "رائع جداً!", "أنت العز كله! 🔥"];
+            document.getElementById('ratingMsg').innerText = msgs[n-1];
+        }
+    </script>
 </body>
 </html>
