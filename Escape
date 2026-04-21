@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            background-color: #000000; /* خلفية سوداء */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .ai-container {
+            width: 100%;
+            max-width: 800px; /* يمكنك تعديل العرض */
+            height: 90vh; /* ارتفاع الواجهة */
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <iframe 
+        src="https://voxa-3a7ac828dfb6.herokuapp.com/webhook/9e69bf82-0dfa-4a70-aab9-fb169d28e3e5" 
+        class="ai-container"
+        title="AI Chat Interface">
+    </iframe>
+
+</body>
+</html>
