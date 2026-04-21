@@ -2,7 +2,9 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        /* إعدادات الخلفية السوداء العامة */
         body, html {
             margin: 0;
             padding: 0;
@@ -13,23 +15,54 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            font-family: 'Courier New', Courier, monospace; /* خط يشبه المحطة القديمة */
         }
 
+        /* حاوية واجهة الذكاء الاصطناعي (iFrame Container) */
         .ai-container {
             width: 100%;
-            max-width: 800px; /* يمكنك تعديل العرض */
+            max-width: 800px; /* يمكنك تعديل العرض حسب الحاجة */
             height: 90vh; /* ارتفاع الواجهة */
+            border: 2px solid #FFD700; /* الأزياق باللون الأصفر الذهبي */
+            border-radius: 10px; /* زوايا دائرية بسيطة */
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); /* توهج أصفر خفيف */
+            overflow: hidden; /* لضمان عدم خروج الـ iFrame عن الحواف الدائرية */
+            position: relative;
+        }
+
+        /* تنسيق الـ iFrame نفسه */
+        .ai-iframe {
+            width: 100%;
+            height: 100%;
             border: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* نص "جاري تحميل..." باللون الأصفر (يظهر إذا لم يفتح الرابط) */
+        .loading-text {
+            color: #FFD700; /* الكتابة باللون الأصفر */
+            text-align: center;
+            font-size: 1.2em;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
         }
     </style>
 </head>
 <body>
 
-    <iframe 
-        src="https://voxa-3a7ac828dfb6.herokuapp.com/webhook/9e69bf82-0dfa-4a70-aab9-fb169d28e3e5" 
-        class="ai-container"
-        title="AI Chat Interface">
-    </iframe>
+    <div class="ai-container">
+        <div class="loading-text">جاري تحميل واجهة الذكاء الاصطناعي...</div>
+        <iframe 
+            src="https://voxa-3a7ac828dfb6.herokuapp.com/webhook/9e69bf82-0dfa-4a70-aab9-fb169d28e3e5" 
+            class="ai-iframe"
+            title="AI Chat Interface">
+        </iframe>
+    </div>
 
 </body>
 </html>
